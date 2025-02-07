@@ -21,8 +21,8 @@ int main()
 
 		BeginDrawing();
 		ClearBackground(DARKGREEN);
-		apple.draw();
-		snake.draw();
+		apple.drawFood();
+		snake.drawSnake();
 		EndDrawing();
 	}
 

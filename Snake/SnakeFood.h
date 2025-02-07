@@ -26,7 +26,7 @@ public:
 		return cellSize;
 	}
 
-	void draw() {
+	void drawFood() {
 		DrawTexture(texture, static_cast<int>(foodPosition.x * getCellSize()), static_cast<int>(foodPosition.y * getCellSize()), WHITE);
 	}
 
