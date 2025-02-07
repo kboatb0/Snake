@@ -31,8 +31,8 @@ public:
 	}
 
 	Vector2 generateRandomPosition() {
-		float x = GetRandomValue(0, getCellSize() - 1);
-		float y = GetRandomValue(0, getCellSize() - 1);
+		float x = (float)GetRandomValue(0, getCellSize() - 1);
+		float y = (float)GetRandomValue(0, getCellSize() - 1);
 		return Vector2{ x, y };
 	}
 };
