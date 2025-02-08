@@ -45,7 +45,7 @@ public:
 	void drawSnake() {
 		for (const auto& segment : snakeBody) {
 			Rectangle rec = { segment.x * cellSize, segment.y * cellSize, (float)cellSize, (float)cellSize };
-			DrawRectangleRounded(rec, 0.5, 10, WHITE);
+			DrawRectangleRounded(rec, 0.5, 10, BLACK);
 		}
 	}
 
