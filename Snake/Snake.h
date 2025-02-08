@@ -9,7 +9,7 @@ private:
 	std::deque<Vector2> snakeBody = { { 6, 4 }, { 5, 4 }, { 4, 4 } };
 	Vector2 move = { 1, 0 };
 	int cellSize;
-	//bool addSegment = false;
+	bool addSegment = false;
 
 public:
 	Snake(int cell) : cellSize(cell) {}
@@ -38,9 +38,9 @@ public:
 		return snakeBody;
 	}
 
-	//void setAddSegment(bool segment) {
-	//	addSegment = segment;
-	//}
+	void setAddSegment(bool segment) {
+		addSegment = segment;
+	}
 	
 	void drawSnake() {
 		for (const auto& segment : snakeBody) {
@@ -50,13 +50,13 @@ public:
 	}
 
 	void updateSnakePos() {
-		//if (addSegment) {
-			//snakeBody.push_front(Vector2Add(snakeBody[0], move));
-			//addSegment = false;
-		//}
-		//else {
+		if (addSegment) {
+			snakeBody.push_front(Vector2Add(snakeBody[0], move));
+			addSegment = false;
+		}
+		else {
 			snakeBody.pop_back();
 			snakeBody.push_front(Vector2Add(snakeBody[0], move));
-		//}
+		}
 	}
 };

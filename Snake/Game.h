@@ -67,7 +67,7 @@ public:
 	void checkFoodCollision(const std::deque<Vector2>& snakePos) {
 		if (Vector2Equals(snake.getHead(), apple.getFoodPosition())) {
 			apple.setFoodPosition(generateRandomPosition(snakePos));
-			//snake.setAddSegment(true);
+			snake.setAddSegment(true);
 		}
 	}
 
