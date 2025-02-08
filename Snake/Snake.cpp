@@ -48,6 +48,7 @@ int main()
 		BeginDrawing();
 		ClearBackground(DARKGREEN);
 		game.draw();
+		DrawText(TextFormat("%i" , game.getScore()), 5, (grid - cellSize), 20, WHITE);
 		EndDrawing();
 	}
 

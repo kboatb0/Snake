@@ -13,6 +13,8 @@ private:
 	Snake snake;
 	Apple apple;
 	bool isRunning = true;
+	int score = 0;
+
 public:
 	Game(int cell) : snake(cell), apple(cell) {
 		apple.setFoodPosition(generateRandomPosition(snake.getSnakeBody()));
@@ -29,8 +31,15 @@ public:
 	}
 
 
+
 	void setIsRuning(bool running) {
 		isRunning = running;
+	}
+
+
+
+	int getScore() {
+		return score;
 	}
 
 
@@ -68,6 +77,7 @@ public:
 		if (Vector2Equals(snake.getHead(), apple.getFoodPosition())) {
 			apple.setFoodPosition(generateRandomPosition(snakePos));
 			snake.setAddSegment(true);
+			score++;
 		}
 	}
 
@@ -78,6 +88,8 @@ public:
 		snake.setSnakeBody({ { 6, 4 }, { 5, 4 }, { 4, 4 } });
 		snake.setMove({ 1 , 0 });
 		Vector2Add(snake.getHead(), snake.getMove());
+		score = 0;
+		apple.setFoodPosition(generateRandomPosition(snake.getSnakeBody()));
 		isRunning = false;
 	}
 
@@ -92,6 +104,7 @@ public:
 			gameOver();
 		}
 	}
+
 
 
 	void checkTailCollision() {
