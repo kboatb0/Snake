@@ -1,21 +1,21 @@
-﻿#include "SnakeFood.h"
-#include "Snake.h"
+﻿#include "Game.h"
 
-const int cellNumber = 30;
-const int cellSize = 30;
-const int grid = cellNumber * cellSize;
-
-
-const float moveInterval = 0.1f;
-float moveTimer = 0.0f;
 
 
 int main()
 {
+	const int cellNumber = 30;
+	const int cellSize = 30;
+	const int grid = cellNumber * cellSize;
+
+
+	const float moveInterval = 0.1f;
+	float moveTimer = 0.0f;
+
+
 	InitWindow(grid, grid, "Snake");
 
-	Snake snake(cellSize);
-	Apple apple(cellSize);
+	Game game(cellSize);
 
 	SetTargetFPS(60);
 
@@ -24,29 +24,30 @@ int main()
 		moveTimer += GetFrameTime();
 
 		if (moveTimer >= moveInterval) {
-			snake.updateSnakePos();
+			game.update();
 			moveTimer = 0.0f;
 		}
 
-		if (IsKeyPressed(KEY_UP) && snake.getMove().y != 1){
-			snake.setMove({ 0 , -1 });
+		if (IsKeyPressed(KEY_UP) && game.getter().y != 1){
+			game.setter({ 0 , -1 });
+			game.setIsRuning(true);
 		}
-		else if (IsKeyPressed(KEY_DOWN) && snake.getMove().y != -1) {
-			snake.setMove({ 0 , 1 });
+		else if (IsKeyPressed(KEY_DOWN) && game.getter().y != -1) {
+			game.setter({ 0 , 1 });
+			game.setIsRuning(true);
 		}
-		else if (IsKeyPressed(KEY_LEFT) && snake.getMove().x != 1) {
-			snake.setMove({ -1, 0 });
+		else if (IsKeyPressed(KEY_LEFT) && game.getter().x != 1) {
+			game.setter({ -1, 0 });
+			game.setIsRuning(true);
 		}
-		else if (IsKeyPressed(KEY_RIGHT) && snake.getMove().x != -1) {
-			snake.setMove({ 1, 0 });
+		else if (IsKeyPressed(KEY_RIGHT) && game.getter().x != -1) {
+			game.setter({ 1, 0 });
+			game.setIsRuning(true);
 		}
-
-		
 
 		BeginDrawing();
 		ClearBackground(DARKGREEN);
-		snake.drawSnake();
-		apple.drawFood();
+		game.draw();
 		EndDrawing();
 	}
 

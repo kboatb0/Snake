@@ -1,7 +1,6 @@
 #pragma once
 
 #include <raylib.h>
-#include <random>
 
 class Apple {
 private:
@@ -15,7 +14,6 @@ public:
 		Image image = LoadImage("food.png");
 		texture = LoadTextureFromImage(image);
 		UnloadImage(image);
-		foodPosition = generateRandomPosition();
 	}
 
 	~Apple() {
@@ -26,13 +24,15 @@ public:
 		return cellSize;
 	}
 
-	void drawFood() {
-		DrawTexture(texture, static_cast<int>(foodPosition.x * getCellSize()), static_cast<int>(foodPosition.y * getCellSize()), WHITE);
+	void setFoodPosition(Vector2 fP) {
+		foodPosition = fP;
 	}
 
-	Vector2 generateRandomPosition() {
-		float x = (float)GetRandomValue(0, getCellSize() - 1);
-		float y = (float)GetRandomValue(0, getCellSize() - 1);
-		return Vector2{ x, y };
+	Vector2 getFoodPosition() {
+		return foodPosition;
+	}
+
+	void drawFood() {
+		DrawTexture(texture, static_cast<int>(foodPosition.x * cellSize), static_cast<int>(foodPosition.y * cellSize), WHITE);
 	}
 };
