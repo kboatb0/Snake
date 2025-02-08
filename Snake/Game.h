@@ -10,47 +10,49 @@
 
 class Game {
 private:
-	Snake snake;
-	Apple apple;
-	bool isRunning = true;
-	int score = 0;
+	Snake snake;									// Instantiate snake
+	Apple apple;									// Instantiate apple				
+	bool isRunning = true;							// Set running to true
+	int score = 0;									// Track score
 
 public:
 	Game(int cell) : snake(cell), apple(cell) {
-		apple.setFoodPosition(generateRandomPosition(snake.getSnakeBody()));
+		apple.setFoodPosition(generateRandomPosition(snake.getSnakeBody()));    // Generate apple position in the constructor
 	}
 
 
+	// Set movement
 	void setter(Vector2 move) {
 		snake.setMove(move);
 	}
 
-
+	
+	// Get snake movement
 	Vector2 getter() {
 		return snake.getMove();
 	}
 
 
-
+	// Set running status
 	void setIsRuning(bool running) {
 		isRunning = running;
 	}
 
 
-
+	// Get score
 	int getScore() {
 		return score;
 	}
 
 
-
+	// Draw the snake and apple
 	void draw() {
 		snake.drawSnake();
 		apple.drawFood();
 	}
 
 
-
+	// Update the status of game
 	void update() {
 		if (isRunning) {
 			snake.updateSnakePos();
@@ -61,7 +63,7 @@ public:
 	}
 
 
-
+	// Checks for collision between the snake and another element
 	bool checkColl(const Vector2& pos, const std::deque<Vector2>& snake) {
 		for (const auto& segment : snake) {
 			if (Vector2Equals(segment, pos)) {
@@ -72,7 +74,7 @@ public:
 	}
 
 
-
+	// Snake grows and apple's position changes if the snake's head collides with the apple
 	void checkFoodCollision(const std::deque<Vector2>& snakePos) {
 		if (Vector2Equals(snake.getHead(), apple.getFoodPosition())) {
 			apple.setFoodPosition(generateRandomPosition(snakePos));
@@ -82,7 +84,7 @@ public:
 	}
 
 
-
+	// Defines how the game ends
 	void gameOver() {
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		snake.setSnakeBody({ { 6, 4 }, { 5, 4 }, { 4, 4 } });
@@ -94,7 +96,7 @@ public:
 	}
 
 
-
+	// Check if the snake hits the any of the screen edges
 	void checkEdgeCollision() {
 		int min = -1;
 		if (snake.getHead().x == min || snake.getHead().x == snake.getCellSize()) {
@@ -106,7 +108,7 @@ public:
 	}
 
 
-
+	// Check if the snake head collides with any other part of the snake
 	void checkTailCollision() {
 		std::deque<Vector2> copy = snake.getSnakeBody();
 		copy.pop_front();
@@ -116,7 +118,7 @@ public:
 	}
 
 
-
+	// Stores the available spaces not occupied by the snake and randomly generates the apple position based on the available spaces
 	Vector2 generateRandomPosition(const std::deque<Vector2>& snake) {
 		std::unordered_set<std::string> occupiedBySnake;
 		for (const auto& segment : snake) {
@@ -134,8 +136,11 @@ public:
 			}
 		}
 
-		if (availableSpace.empty())
+		if (availableSpace.empty()) {
 			return { -1, -1 };
+			gameOver();
+		}
+
 
 		int index = GetRandomValue(0, availableSpace.size() - 1);
 		return availableSpace[index];
