@@ -11,7 +11,7 @@ private:
 
 public:
 	Apple(int cell) : cellSize(cell) {
-		Image image = LoadImage("food.png");
+		Image image = LoadImage("apple.png");
 		texture = LoadTextureFromImage(image);
 		UnloadImage(image);
 	}
