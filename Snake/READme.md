@@ -27,3 +27,5 @@ user inputs.
 
 ### Note
 The library was linked statically
+
+Find more my repository [kboatb0](https://github.com/kboatb0)
